@@ -1,0 +1,25 @@
+<kendo-grid [kendoGridBinding]="gridView" kendoGridSelectBy="id" [pageSize]="10" [pageable]="true" [sortable]="true"
+    [groupable]="false" [reorderable]="true" [resizable]="true" [height]="480" [columnMenu]="{ filter: true }">
+    <ng-template kendoGridToolbarTemplate>
+        <input placeholder="Search in all columns..." kendoTextBox (input)="onFilter($event.target.value)" />
+        <button type="button" icon="add" [routerLink]="['/categories/add']" style="float:right;">Add New Item</button>
+    </ng-template>
+    <kendo-grid-checkbox-column [width]="45" [headerClass]="{'text-center': true}" [class]="{'text-center': true}"
+        [resizable]="false" [columnMenu]="false" showSelectAll="true"></kendo-grid-checkbox-column>
+    <kendo-grid-column field="name" title="Category Name" [width]="220">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <div class="customer-name">{{ dataItem.name }}</div>
+        </ng-template>
+    </kendo-grid-column>
+
+    <kendo-grid-command-column title="Command" [width]="100" [class]="{'text-center': true}" [resizable]="false"
+        filter="boolean">
+        <ng-template kendoGridCellTemplate let-dataItem>
+            <button kendoGridEditCommand class="k-primary" icon="edit" [routerLink]="['/categories', dataItem.id]"
+                type="button" style="float:right;"></button>
+            <button kendoGridEditCommand class="k-primary" icon="delete" (click)="deleteCategory(dataItem.id)"
+                type="button" style="float:right;"></button>
+        </ng-template>
+    </kendo-grid-command-column>
+
+</kendo-grid>

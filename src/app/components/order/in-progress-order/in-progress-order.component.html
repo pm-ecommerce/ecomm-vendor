@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="block full">
+      <div class="block-title">
+        <h2>In-progress Order List ({{(gridData.data || []).length}})</h2>
+      </div>
+
+      <div class="table-responsive">
+        <kendo-grid [data]="gridData.data || []" [skip]="gridView.skip" [pageSize]="gridView.pageSize"
+          [sortable]="gridView.sortable" [sort]="sort" [height]="gridView.height" (sortChange)="sortChange($event)"
+          [filterable]="true">
+
+          <kendo-grid-column field="order_id" title="Order Id" [width]="120" [filterable]="false">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <div class="customer-name">{{ dataItem.order_id }}</div>
+            </ng-template>
+          </kendo-grid-column>
+
+          <kendo-grid-column field="user_id" title="User Id" [width]="120" [filterable]="false">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <div class="customer-name">{{ dataItem.user_id }}</div>
+            </ng-template>
+          </kendo-grid-column>
+
+          <kendo-grid-column field="status" title="Status" [width]="100" [class]="{'text-center': true}"
+            [resizable]="false" [filterable]="false">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              <div class="customer-name">{{ dataItem.status }}</div>
+            </ng-template>
+          </kendo-grid-column>
+
+          <kendo-grid-column field="order_date" title="Order Date" [width]="200" [class]="{'text-center': true}"
+            [resizable]="false" [filterable]="false">
+            <ng-template kendoGridCellTemplate let-dataItem>
+              {{ dataItem.order_date }}
+            </ng-template>
+          </kendo-grid-column>
+
+        </kendo-grid>
+        <pagination [totalItems]="gridData.totalPages * gridData.itemsPerPage" align="center"
+          [itemsPerPage]="gridData.itemsPerPage" [maxSize]="10" (pageChanged)="loadOrders($event.page)">
+        </pagination>
+      </div>
+    </div>
+  </div>
+</div>

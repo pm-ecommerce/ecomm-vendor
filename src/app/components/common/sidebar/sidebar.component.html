@@ -1,0 +1,99 @@
+<div id="sidebar">
+  <div id="sidebar-brand" class="themed-background">
+    <a routerLink="" class="sidebar-title">
+      <img src="/assets/img/logo.png" />
+    </a>
+  </div>
+  <div id="sidebar-scroll">
+    <div class="sidebar-content">
+      <ul class="sidebar-nav">
+        <li>
+          <a [routerLink]="['/']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ exact: true }"
+            class="parent-menu-item">
+            <i class="gi gi-compass sidebar-nav-icon"></i>
+            <span class="sidebar-nav-mini-hide">Dashboard</span>
+          </a>
+        </li>
+        <!--li>
+          <a [routerLink]="['/categories']" [routerLinkActive]="['active']" class="parent-menu-item">
+            <i class="fa fa-font sidebar-nav-icon"></i>
+            <span class="sidebar-nav-mini-hide">Categories</span>
+          </a>
+        </li-->
+        <li>
+          <a href="javascript:void(0);" class="sidebar-nav-menu">
+            <i class="fa fa-chevron-left sidebar-nav-indicator sidebar-nav-mini-hide"></i>
+            <i class="fa fa-gears sidebar-nav-icon"></i>
+            <span class="sidebar-nav-mini-hide">Products</span>
+          </a>
+          <ul>
+            <li>
+              <a [routerLink]="['/products']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+                <i class="fa fa-th sidebar-nav-icon"></i> List
+              </a>
+            </li>
+            <li>
+              <a [routerLink]="['/products/pending-approval']" [routerLinkActive]="['active']"
+                [routerLinkActiveOptions]="{exact: true}">
+                <i class="fa fa-th sidebar-nav-icon"></i> Pending approval
+              </a>
+            </li>
+            <li>
+              <a [routerLink]="['/products/disapproved']" [routerLinkActive]="['active']"
+                [routerLinkActiveOptions]="{exact: true}">
+                <i class="fa fa-th sidebar-nav-icon"></i> Disapproved
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="javascript:void(0);" class="sidebar-nav-menu">
+            <i class="fa fa-chevron-left sidebar-nav-indicator sidebar-nav-mini-hide"></i>
+            <i class="gi gi-shopping_cart sidebar-nav-icon"></i>
+            <span class="sidebar-nav-mini-hide">Orders</span>
+          </a>
+          <ul>
+            <li>
+              <a [routerLink]="['/orders']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+                <i class="fa fa-th sidebar-nav-icon"></i> Active orders
+              </a>
+            </li>
+            <li>
+              <a [routerLink]="['/orders/complete']" [routerLinkActive]="['active']"
+                [routerLinkActiveOptions]="{exact: true}">
+                <i class="fa fa-th sidebar-nav-icon"></i> Completed
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="javascript:void(0);" class="sidebar-nav-menu">
+            <i class="fa fa-chevron-left sidebar-nav-indicator sidebar-nav-mini-hide"></i>
+            <i class="fa fa-bar-chart sidebar-nav-icon"></i>
+            <span class="sidebar-nav-mini-hide">Report</span>
+          </a>
+          <ul>
+            <li>
+              <a [routerLink]="['/report/sales']" [routerLinkActive]="['active']"
+                [routerLinkActiveOptions]="{exact: true}">
+                <i class="fa fa-th sidebar-nav-icon"></i> Sales report
+              </a>
+            </li>
+            <li>
+              <a [routerLink]="['/report/category']" [routerLinkActive]="['active']"
+                [routerLinkActiveOptions]="{exact: true}">
+                <i class="fa fa-th sidebar-nav-icon"></i> Category report
+              </a>
+            </li>
+            <li>
+              <a [routerLink]="['/report/product']" [routerLinkActive]="['active']"
+                [routerLinkActiveOptions]="{exact: true}">
+                <i class="fa fa-th sidebar-nav-icon"></i> Product report
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

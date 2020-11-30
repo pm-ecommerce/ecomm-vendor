@@ -1,0 +1,40 @@
+<ng-template #optionForm let-c="close">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" (click)="closeOption()">
+      ×
+    </button>
+    <h3 class="modal-title"><strong>{{option.name || 'Add an option'}}</strong></h3>
+  </div>
+  <div class="modal-body">
+    <form action="" method="post" class="form-horizontal" enctype="multipart/form-data">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="col-sm-12 control-label" for="display_name">Name</label>
+            <div class="col-sm-12">
+              <input type="text" id="display_name" name="display_name" class="form-control"
+                     placeholder="Enter name" [(ngModel)]="option.name">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="col-sm-12 control-label" for="price">Price</label>
+            <div class="col-sm-12">
+              <input type="text" id="price" name="price" class="form-control"
+                     placeholder="Enter price" [(ngModel)]="option.price">
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-effect-ripple btn-success"
+            style="overflow: hidden; position: relative;" (click)="saveOption()">Apply
+    </button>
+    <button type="button" class="btn btn-effect-ripple btn-default" data-dismiss="modal"
+            style="overflow: hidden; position: relative;" (click)="closeOption()">Cancel
+    </button>
+  </div>
+</ng-template>

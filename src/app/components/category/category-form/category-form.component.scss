@@ -1,0 +1,14 @@
+.example {
+    display: flex;
+    justify-content: left;
+}
+.wrap {
+  display: flex;
+  justify-content: space-between;
+}
+.wrap .arrival-date {
+  width: 90%;
+  margin-right: 18px;
+}
+textarea { resize: vertical; }
+.k-form { width: 400px; }

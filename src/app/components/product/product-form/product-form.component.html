@@ -1,0 +1,144 @@
+<form method="post" action="" class="form-horizontal" enctype="multipart/form-data">
+  <tabset>
+    <tab heading="Configuration" [active]="true">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="col-sm-12 control-label" for="name">Name</label>
+            <div class="col-sm-12">
+              <input type="text" id="name" name="name" class="form-control"
+                     placeholder="Enter name"
+                     [(ngModel)]="product.name" (input)="setSlug(product)">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="col-sm-12 control-label" for="category">Category</label>
+            <div class="col-sm-12">
+              <select [compareWith]="byCategory" class="form-control" id="category" name="category" [(ngModel)]="product.category">
+                <option *ngFor="let cat of categories" [ngValue]="cat">{{cat.name}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="col-sm-12 control-label" for="slug">Slug</label>
+            <div class="col-sm-12">
+              <input type="text" id="slug" name="slug" class="form-control"
+                     placeholder="Enter slug"
+                     [(ngModel)]="product.slug">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="col-sm-12 control-label" for="price">Price</label>
+            <div class="col-sm-12">
+              <input type="text" id="price" name="price" class="form-control"
+                     placeholder="Enter price"
+                     [(ngModel)]="product.price">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-12 control-label" for="description">Description</label>
+        <div class="col-sm-12">
+          <ckeditor name="description" id="description" [(ngModel)]="product.description"></ckeditor>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-6 col-sm-3">
+          <div class="form-group">
+            <label class="control-label col-sm-12">Images</label>
+            <div class="col-sm-8">
+              <aws-upload [folder]="'ecomm/products/'+product.slug" [multiple]="true"
+                          (onupload)="multipleImages($event)"></aws-upload>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-12">
+          <ng-container *ngIf="product.images && product.images.length > 0">
+            <ul class="list-inline">
+              <ng-container *ngFor="let image of product.images; let id = index;">
+                <li class="list-inline-item">
+                  <p class="no-margin">
+                    <a (click)="removeImage(id)" style="margin-left: 5px; color: #F00">
+                      &Chi;
+                    </a>
+                  </p>
+                  <img src="{{image.name|imageUrl}}" style="margin-top: 10px;max-height: 115px;max-width: 145px;"/>
+                </li>
+              </ng-container>
+            </ul>
+          </ng-container>
+        </div>
+      </div>
+    </tab>
+    <tab heading="Attributes">
+      <div *ngFor="let attr of product.attributes;let i=index;">
+        <div class="mul-attributes">
+          <button tooltip="Remove this attribute" placement="top" type="button"
+                  class="btn btn-danger btn-xs btn-round btn-rounded btn-circle btn-remove-attr"
+                  (click)="product.removeCurrentAttribute(i)">
+            <i class="fa fa-times"></i>
+          </button>
+          <button tooltip="Clone this attribute" placement="top" type="button"
+                  class="btn btn-info btn-xs btn-round btn-rounded btn-circle btn-clone-attr"
+                  (click)="product.cloneAttribute(attr,i)">
+            <i class="fa fa-copy"></i>
+          </button>
+          <div class="row">
+            <div class="col-xs-6 col-sm-3">
+              <div class="form-group">
+                <label for="attribute_name{{i}}" class="control-label col-sm-12">
+                  Name
+                </label>
+                <div class="col-sm-12">
+                  <input type="text" placeholder="Name" id="attribute_name{{i}}"
+                         name="attribute_name[{{i}}]"
+                         class="form-control" [(ngModel)]="attr.name"/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12">
+              <div class="form-group">
+                <label class="control-label col-sm-12">Options</label>
+                <div class="col-sm-12">
+                  <tag-input dragZone="options[{{i}}]" name="options[{{i}}]"
+                             [removable]="true"
+                             [(ngModel)]="attr.options"
+                             (onSelect)="optionClicked($event,attr, i)"
+                             (onAdd)="product.createOptionId($event,attr, i)"></tag-input>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:10px;">
+        <button tooltip="Add Attributes" placement="top" type="button" class="btn btn-info"
+                (click)="product.addAnotherAttribute()">
+          <i class="fa fa-plus"></i>
+        </button>
+
+        <button tooltip="Remove All Attributes" placement="top" type="button"
+                class="btn btn-danger"
+                (click)="product.removeAllAttributes()">
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+    </tab>
+  </tabset>
+</form>
+
+<app-attr-option [attribute]="selectedAttribute" [option]="option" [product]="product" (optionSave)="optionSave($event)"
+                 *ngIf="option"></app-attr-option>

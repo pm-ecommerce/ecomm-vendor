@@ -1,0 +1,17 @@
+<div class="example">
+    <form class="k-form" [formGroup]="form">
+        <h5>{{ modifier }} CATEGORY</h5>
+
+
+        <kendo-formfield>
+            <kendo-label for="name" text="Category Name"></kendo-label>
+            <input kendoTextBox id="name" formControlName="name" [(ngModel)]="data.name" />
+            <kendo-formerror>Error: Category Name is required</kendo-formerror>
+        </kendo-formfield>
+
+        <div class="k-form-buttons">
+            <button class="k-button k-primary" (click)="submitForm()">Save</button>
+            <button class="k-button" (click)="clearForm()">Clear</button>
+        </div>
+    </form>
+</div>
